@@ -14,19 +14,22 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 class ApiClient {
-    fun getMovieApiService(): ApiInterface {
+    fun doRequest(): Retrofit {
         val gson = GsonBuilder().create()
         val loggingInterceptor =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             else HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
-        val retrofit = Retrofit.Builder()
+        return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-        return retrofit.create(ApiInterface::class.java)
+    }
+
+    fun apiTheMovie(): ApiTheMovie{
+        return doRequest().create(ApiTheMovie::class.java)
     }
 }

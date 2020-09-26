@@ -1,6 +1,5 @@
 package com.stimednp.kotlinsamplemvvm.repository
 
-import com.stimednp.kotlinsamplemvvm.BuildConfig
 import com.stimednp.kotlinsamplemvvm.model.MovieResponse
 import com.stimednp.kotlinsamplemvvm.network.ApiClient
 import retrofit2.Call
@@ -10,9 +9,10 @@ import retrofit2.Call
  * Find me on my lol Github :D -> https://github.com/im-o
  */
 
-class MovieRepository {
-    fun getMovies(): Call<MovieResponse>{
-        val apiService = ApiClient().getMovieApiService()
-        return apiService.getMovieList(BuildConfig.API_KEY,"en-US")
+class MovieRepository(
+    private val apiClient: ApiClient
+) {
+    fun getMoviesList(apiKey: String, strLanguage: String): Call<MovieResponse>{
+        return apiClient.apiTheMovie().getMovieList(apiKey, strLanguage)
     }
 }

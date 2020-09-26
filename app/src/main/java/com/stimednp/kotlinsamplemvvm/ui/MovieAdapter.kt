@@ -1,8 +1,6 @@
-package com.stimednp.kotlinsamplemvvm.view
+package com.stimednp.kotlinsamplemvvm.ui
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -33,14 +31,13 @@ class MovieAdapter(private val movieList: MutableList<MovieList>) : RecyclerView
             val strDesc = movieList.overview
             val strVote = movieList.voteAverage.toString()
 
-            Log.e("INIIII","INIIII -> $strTitle\n$strTitle\n$strVote")
             binding.apply {
-                tvTitle.text = strTitle
-                tvOverview.text = strDesc
-                tvVote.text = strVote
+                titleTV.text = strTitle
+                overviewTV.text = strDesc
+                voteTV.text = strVote
                 Picasso.get()
                     .load(strUrlImg)
-                    .into(imgPoster)
+                    .into(posterIV)
             }
         }
     }

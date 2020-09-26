@@ -10,7 +10,10 @@ import retrofit2.http.Query
  * Find me on my lol Github :D -> https://github.com/im-o
  */
 
-interface ApiInterface {
+interface ApiTheMovie {
     @GET("discover/movie") //discover/movie?api_key={your api key}&language={language}
-    fun getMovieList(@Query("api_key") apiKey: String, @Query("language") strLanguage: String) : Call<MovieResponse>
+    fun getMovieList(
+        @Query("api_key") apiKey: String,
+        @Query("language") strLanguage: String
+    ): Call<MovieResponse>
 }
